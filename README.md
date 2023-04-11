@@ -62,3 +62,19 @@ We didn't mention it before, but **the ends of the range are reserved
 addresses** and can't be used. The lower end is reserved for the network IP and
 the upper end is the broadcast address, so the effective range is `104.198.241.0 - 104.198.241.255`.
 
+# Project exercises
+
+Now that we know the basics of how network elements work, we can start solving
+the exercises. If you are also a 42 student, it's recommended that first you try to
+solve them on your own!
+
+<details>
+  <summary>Level 1</summary>
+
+![Level 1](images/level1.png)
+
+In this level, all we need to do is ensure that IP directions are in a valid
+range, they have to be in the same network IP and we have to double check that
+the IPs are valid and every value is between 0 and 255.
+
+</details>
