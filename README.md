@@ -4,6 +4,11 @@ This project is about solving 10 networking problems to make a network run. We w
 configure small networks, but first we must know how networking and IP addresses
 work.
 
+> Also I would like to add a little disclaimer. I have no background or formal
+> knowledge on networking and everything I have learned is through this project.
+> If you find something wrong or you could explain something a bit further than I
+> do, please I encourage you to open an issue or to submit a pull request.
+
 ## Basic concepts
 
 ### TCP
@@ -55,12 +60,13 @@ To obtain the **network IP**, we must AND both binary addresses, resulting in
 
 To calculate the host address range, we take the last octet, in this case its
 `00000000`. The host addresses can range between `00000000` and `11111111`,
-translated to our example, the IPs can range between `104.198.241.0 -
-104.198.241.255`.
+translated to our example, the IPs can range between `[104.198.241.0 -
+104.198.241.255]`.
 
 We didn't mention it before, but **the ends of the range are reserved
 addresses** and can't be used. The lower end is reserved for the network IP and
-the upper end is the broadcast address, so the effective range is `104.198.241.0 - 104.198.241.255`.
+the upper end is the broadcast address, so the effective range is
+`[104.198.241.1 - 104.198.241.254]`.
 
 # Project exercises
 
@@ -97,7 +103,7 @@ to follow).
 Also, when we talked about how both ends of the host IP ranges are reserved, we
 should have added other reserved addresses like the ones for private networks.
 
-The range `127.0.0.1 - 127.255.255.255` is reserved for localhost, and it allows
+The range `[127.0.0.1 - 127.255.255.255]` is reserved for localhost, and it allows
 the computer to communicate with itself. One example that we have seen in the
 cursus is in the Born2BeRoot project, in which we configure a web server and use
 the localhost IP to connect to it.
@@ -123,7 +129,7 @@ mask. To do so, we take the subnet mask and invert it or sustract the zeros
 part.
 
 In this case, for 255.255.255.128 or `/25`, the range of valid IPs goes from
-`x.x.x.0 - x.x.x.127` (x being the network address), so every connected device
+`(x.x.x.0 - x.x.x.127)` (x being the network address), so every connected device
 is OK as long as it doesn't go out of this range and doesn't overlap with lower
 and upper ends.
 
@@ -134,10 +140,19 @@ and upper ends.
 <details>
   <summary>Show level details</summary>
 
-
-
 ![Level 4](images/level4.png)
 
+In this level we see a router for the first time. A router is a device that
+connects different networks and links them together. It has an interface and IP
+for every network that it connects to.
+
+The most important thing for this level is to keep in mind that interfaces R2
+and R3 have nothing to do with the devices connected to R1, so we can treat them
+independently and assign them any subnet mask.
+
+The only consideration we need to have is that clients A1 and B1 should also
+communicate with router's interfaces R2 and R3, so the IPs of these clients
+should be in the range `(x.x.x.128 - x.x.x.192)`
 
 </details>
 
@@ -148,6 +163,35 @@ and upper ends.
 
 ![Level 5](images/level5.png)
 
+In this level we have to connect interfaces A1 and B1 together, but this time we
+don't connect them directly together. We need to connect them through the router
+interfaces, R1->A1 and R2->B1.
+
+We put the clients masks in the same networks as their router interfaces and
+configure a valid IP for each.
+
+Now we see a new concept and a new field to configure that we haven't seen
+before. The table we see in both clients is a routing table.
+
+The **routing table** is a table that helps the router to find the target of the
+packages and it's analogous to a distribution map in package delivery. The
+routing table is the database that keeps track of all paths, like a map. To
+complete this exercise, we need to fill two fields:
+
+- Destination: it's the network address of the packet's final destination. If we
+    put `default` or `0.0.0.0/0 ` on the destination, it will match any network.
+    It's going to forward all the packets through the next hop.
+
+- Next hop: it's the IP address of the next device in a network that a packet
+    can go through.
+
+In client B, the destination matches the default network, so in this case we
+need to configure the next hop to be the router interface IP.
+
+In client A, our next hop should also be the router interface IP, but we are
+free to choose the destination address. We can do the same as in client B and
+introduce the default address or we can introduce the client B address in the
+format `x.x.x.x/net_mask`, it works in both ways.
 
 </details>
 
