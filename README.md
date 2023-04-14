@@ -202,6 +202,23 @@ format `x.x.x.x/net_mask`, it works in both ways.
 
 ![Level 6](images/level6.png)
 
+In this level, we see the internet for the first time, but it works the same way
+as a router. The destination of the internet packages must match the client A IP
+and netmask.
+
+The router R connects to the internet through interface R2, which we don't have
+to modify, but we have to modify the destination of the routing table to match
+the default address as destination.
+
+We can't modify the next hop of the router, but just so you know, that address
+is the gateway address, the *door* that takes us from our home to the internet.
+
+For the next part, we have to find the network address and configure the IP of
+the R1 and A1. The following thing to do is to configure the routing table of
+client A.
+
+In the destination, we can put the default address or the internet address, and
+in the next hop we have to introduce the IP of the interface R1.
 
 </details>
 
