@@ -253,6 +253,26 @@ the interface that connects to the router.
 
 ![Level 8](images/level8.png)
 
+For this level, we need to match interfaces D1-R23, C1-R22, R21-R13 and R-12 to
+the internet.
+
+As the Interface R12 has a fixed IP, the next hop of the internet routing table
+has to be this IP.
+
+The next thing we have to do is to place R13 and R21 in the same net. First, we
+see that the next hop address of router R2 is fixed, so this must be the IP of
+the interface R13.
+
+For interface R21, we can choose any IP as long as it's in the IP range of R13,
+and we have to place it as the next hop IP of router R1.
+
+Now we should configure Router R2 and clients C and D. Interfaces R22 and R23
+must have their own subnet, so they don't overlap with any other interface of
+this router, and then interfaces D1 and C1 must be in the same subnet as the
+router interface that they are connected to.
+
+The clients C and D destination must be the default one, and the next hop has to
+be the same as their router interfaces.
 
 </details>
 
