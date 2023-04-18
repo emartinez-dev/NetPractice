@@ -229,6 +229,20 @@ in the next hop we have to introduce the IP of the interface R1.
 
 ![Level 7](images/level7.png)
 
+In this level, we have to connect client A to client C through routers R1 and
+R2. We must arrange the devices in 3 subnets, one for Interface A1 and Interface
+R11, another one for interfaces R12 and R21, and the last one for interfaces R22
+and C1.
+
+Once we created all the subnets and assigned every interface to its pair, we
+need to configure the routing tables of both clients and routers.
+
+Router R1 will forward all its upcoming packets to interface R21, and Router R2
+will forward all its upcoming packets to interface R12.
+
+Now for the last part, we must configure Client A and Client C tables. The
+destination of Client A is Client C IP's, and viceversa, and their next hop is
+the interface that connects to the router.
 
 </details>
 
