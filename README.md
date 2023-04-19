@@ -283,6 +283,28 @@ be the same as their router interfaces.
 
 ![Level 9](images/level9.png)
 
+In this level, we have 6 goals to achieve and we will be completing them in
+order.
+
+For the first goal, we have to communicate Client A and B, that are connected
+through a switch to a router. We have done this already in previous exercises,
+just remember what IP ranges are valid.
+
+For the second goal, we have to communicate Client C and D through a router, and
+we are given the client D next hop, so that should be its router interface IP.
+
+For the third goal, we need to communicate Client A with the internet. As it's
+already connected to the router R1, we just need to configure the internet
+destination to match its IP address.
+
+For goal 4 and 5, we need to connect Clients A and D together and Clients B and
+C. As we are completing them in order, it will be as easy as connecting Router
+R1 and R2 because they have their networks well configured already. To do so,
+ensure that router R1 next hop matches router R2 interface and viceversa. Be
+careful that the IPs are really similar, so check everything carefully.
+
+The last goal consists of connecting Client C to the Internet, so we just add
+its IP and mask to the internet destinations.
 
 </details>
 
